@@ -5,4 +5,4 @@ const certificateSchema = new Schema({
 		type: String,
 	}
 }, schemaOptions)
-module.exports = model('Sertificate', certificateSchema)
+module.exports = model('Certificate', certificateSchema)

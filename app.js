@@ -13,7 +13,7 @@ var app = express()
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 app.use(cors())
 app.use(fileUpload())
 // app.use(express.static('uploads'));

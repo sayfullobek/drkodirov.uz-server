@@ -1,4 +1,4 @@
-const { Users, Course } = require("../models")
+const { Admin } = require("../models")
 const CryptoJS = require('crypto-js')
 const jwt = require("jsonwebtoken")
 
@@ -7,7 +7,7 @@ exports.login = async (req, res) => {
 		const {
 			phoneNumber, password
 		} = req.body
-		const users = await Users.findOne({ phoneNumber })
+		const users = await Admin.findOne({ phoneNumber })
 		if (!users) {
 			return res.status(401).json({
 				message: "Telefon raqam yoki parolingizda xatolik"

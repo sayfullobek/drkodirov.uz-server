@@ -24,7 +24,7 @@ exports.login = async (req, res) => {
 		return res.status(200).json({
 			message: "Xisobingizga muvaffaqiyatli kirdingiz",
 			token,
-			url: `/dr-kodirov/auth/dashboard`,
+			url: `/dr-kodirov/auth/dashboard/certificate`,
 			users
 		})
 	} catch (err) {

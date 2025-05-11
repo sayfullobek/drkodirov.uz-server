@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const { shortController } = require('../controller')
 const { verifyUsersToken } = require('../config')
+const upload = require('../middlewares/upload')
 
 router.get('/', shortController.getAll)
 router.get('/:id', shortController.getOne)

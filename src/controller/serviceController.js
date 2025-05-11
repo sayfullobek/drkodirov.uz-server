@@ -4,7 +4,9 @@ const { Service } = require('../models')
 exports.create = async (req, res) => {
 	try {
 		const { name, description } = req.body
-		const service = await Service.create({ name, description })
+		// const service = await Service.create({ name, description })
+		const service = new Service({ name, description })
+		await service.save()
 		res.status(201).json({ message: "Xizmat yaratildi", service })
 	} catch (err) {
 		res.status(500).json({ message: err.message })

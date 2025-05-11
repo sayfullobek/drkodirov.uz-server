@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const { Users } = require('../models')
+const { Admin } = require('../models')
 
 const tokenDecode = (req) => {
 	const bearerHeader = req.headers.authorization
@@ -21,7 +21,7 @@ exports.verifyUsersToken = async (req, res, next) => {
 	try {
 		const tokenDecoded = tokenDecode(req)
 		if (tokenDecoded) {
-			const users = await Users.findById(tokenDecoded.id)
+			const users = await Admin.findById(tokenDecoded.id)
 			if (!users) return res.status(401).json({ message: 'No allowed' })
 			req.users = users
 			next()

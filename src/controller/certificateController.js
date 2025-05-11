@@ -1,8 +1,9 @@
 const { Certificate } = require('../models')
 const fs = require('fs')
 const path = require('path')
+const upload = require('../middlewares/upload')
 
-// CREATE
+// CREATE upload.single('photo'), 
 exports.create = async (req, res) => {
 	try {
 		if (!req.file) {
@@ -16,7 +17,6 @@ exports.create = async (req, res) => {
 			imageUrl: `${req.protocol}://${req.get('host')}/uploads/${photo}`
 		})
 	} catch (err) {
-		console.error(err)
 		res.status(500).json({ message: 'Server xatosi' })
 	}
 }

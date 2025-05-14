@@ -1,41 +1,30 @@
 #!/usr/bin/env node
 
 const app = require('../app');
-const debug = require('debug')('drkodirov.uz-server:server');
-const https = require('https');
-const fs = require('fs');
+const http = require('http');
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const dataLoader = require('../src/component/dataLoader');
 dotenv.config();
 
-// Sertifikat fayllar
-const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/api.drkodirov.uz/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/api.drkodirov.uz/fullchain.pem'),
-};
-
-// Port
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-// MongoDB ulanish va HTTPS serverni ishga tushurish
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   connectTimeoutMS: 30000,
 }).then(() => {
-  https.createServer(options, app).listen(port, () => {
-    console.log(`✅ HTTPS server running on port ${port}`);
+  http.createServer(app).listen(port, () => {
+    console.log(`✅ HTTP server running on port ${port}`);
     dataLoader.createCEO();
     console.log("Mongo connect");
   });
 }).catch(err => {
-  console.error('MongoDB ulanishda xatolik:', err);
+  console.error('MongoDB xatosi:', err);
   process.exit(1);
 });
 
-// Portni normal holatga keltirish
 function normalizePort(val) {
   const port = parseInt(val, 10);
   if (isNaN(port)) return val;

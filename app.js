@@ -8,6 +8,8 @@ var logger = require('morgan')
 const cors = require('cors')
 // const fileUpload = require('express-fileupload')
 
+var app = express()
+
 const options = {
   key: fs.readFileSync('/etc/letsencrypt/live/api.drkodirov.uz/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/api.drkodirov.uz/fullchain.pem')
@@ -18,8 +20,6 @@ https.createServer(options, app).listen(3000, () => {
 });
 
 var indexRouter = require('./src/routes/index')
-
-var app = express()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))

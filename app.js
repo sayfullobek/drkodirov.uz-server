@@ -6,6 +6,15 @@ var logger = require('morgan')
 const cors = require('cors')
 // const fileUpload = require('express-fileupload')
 
+// const options = {
+//   key: fs.readFileSync('/etc/letsencrypt/live/api.drkodirov.uz/privkey.pem'),
+//   cert: fs.readFileSync('/etc/letsencrypt/live/api.drkodirov.uz/fullchain.pem')
+// };
+
+// https.createServer(options, app).listen(3000, () => {
+//   console.log("HTTPS server running on port 3000");
+// });
+
 var indexRouter = require('./src/routes/index')
 
 var app = express()

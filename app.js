@@ -1,5 +1,5 @@
-const https = require('https');
-const fs = require('fs');
+// const https = require('https');
+// const fs = require('fs');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -10,10 +10,10 @@ const cors = require('cors');
 
 const app = express(); // ⚠️ AVVAL app ni yaratamiz
 
-const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/api.drkodirov.uz/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/api.drkodirov.uz/fullchain.pem')
-};
+// const options = {
+//   key: fs.readFileSync('/etc/letsencrypt/live/api.drkodirov.uz/privkey.pem'),
+//   cert: fs.readFileSync('/etc/letsencrypt/live/api.drkodirov.uz/fullchain.pem')
+// };
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,9 +43,13 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-// HTTPS serverni **eng oxirida** ishga tushuramiz
-https.createServer(options, app).listen(3000, () => {
-  console.log("✅ HTTPS server running on port 3000");
+app.get('/', (req, res) => {
+  res.send('Server ishlayapti!');
 });
+
+// HTTPS serverni **eng oxirida** ishga tushuramiz
+// https.createServer(options, app).listen(3000, () => {
+//   console.log("✅ HTTPS server running on port 3000");
+// });
 //ulashish
 module.exports = app

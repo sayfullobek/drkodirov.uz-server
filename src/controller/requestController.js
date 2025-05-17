@@ -3,8 +3,26 @@ const { Request } = require('../models')
 // CREATE
 exports.create = async (req, res) => {
 	try {
-		const { fullName, phoneNumber, date, message } = req.body
-		const request = await Request.create({ fullName, phoneNumber, date, message })
+		const {
+			fullName,
+			phoneNumber,
+			date,
+			message,
+			isFromUzbekistan,
+			region,
+			country
+		} = req.body
+
+		const request = await Request.create({
+			fullName,
+			phoneNumber,
+			date,
+			message,
+			isFromUzbekistan,
+			region,
+			country
+		})
+
 		res.status(201).json({ message: "So‘rov yaratildi", request })
 	} catch (err) {
 		res.status(500).json({ message: err.message })
@@ -35,12 +53,30 @@ exports.getOne = async (req, res) => {
 // UPDATE
 exports.update = async (req, res) => {
 	try {
-		const { fullName, phoneNumber, date, message } = req.body
+		const {
+			fullName,
+			phoneNumber,
+			date,
+			message,
+			isFromUzbekistan,
+			region,
+			country
+		} = req.body
+
 		const request = await Request.findByIdAndUpdate(
 			req.params.id,
-			{ fullName, phoneNumber, date, message },
+			{
+				fullName,
+				phoneNumber,
+				date,
+				message,
+				isFromUzbekistan,
+				region,
+				country
+			},
 			{ new: true }
 		)
+
 		if (!request) return res.status(404).json({ message: "Topilmadi" })
 		res.status(200).json({ message: "Yangilandi", request })
 	} catch (err) {
